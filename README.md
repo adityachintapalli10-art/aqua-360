@@ -7,10 +7,10 @@ A self-contained, demo-first water monitoring app for a hackathon. It includes a
 Requires Python 3.10 or newer; no JavaScript build or third-party Python package installation is required.
 
 ```powershell
-python server.py init-db
-python server.py create-admin
-python server.py seed-demo
-python server.py
+python main.py init-db
+python main.py create-admin
+python main.py seed-demo
+python main.py
 ```
 
 The account setup asks for a username, email, and password (at least 12 characters); credentials are not shipped in the repository. Open <http://127.0.0.1:8000> and sign in. To skip sample data, omit `seed-demo`. Sample locality names and readings are explicitly identified as demo data and are not real measurements or locations.
@@ -21,8 +21,8 @@ The default database is `data/aquaguard.db`. Set `AQUAGUARD_DB` to another SQLit
 
 ```sh
 docker compose build
-docker compose run --rm aquaguard python server.py create-admin
-docker compose run --rm aquaguard python server.py seed-demo
+docker compose run --rm aquaguard python main.py create-admin
+docker compose run --rm aquaguard python main.py seed-demo
 docker compose up
 ```
 
@@ -105,6 +105,6 @@ They exercise unauthenticated access, login, CSRF enforcement, locality/device c
 
 ## Architecture and known limitations
 
-`server.py` contains a standard-library threaded HTTP server, REST handlers, scrypt/session auth, the SQLite schema, demo simulator, alert rules, audit trail, and CSV export. `static/` is a responsive, dependency-free admin UI; `tests/` covers the primary API workflow.
+`main.py` is the Python entry point and contains a standard-library threaded HTTP server, REST handlers, scrypt/session auth, the SQLite schema, demo simulator, alert rules, audit trail, and CSV export. `static/` is a responsive, dependency-free admin UI; `tests/` covers the primary API workflow.
 
 This is deliberately a compact hackathon implementation, not a production municipal deployment. It uses SQLite and a small browser UI rather than the requested React/FastAPI/PostgreSQL stack; this keeps the project runnable with the Python runtime alone. There are no migrations, map/geocoding, PDF reports, configurable schedules or water-balance model, pressure-drop analytics, alert notification integrations, complete maintenance/repair verification lifecycle, or production observability/backup system. Use measured compatible inlet/outlet boundaries and matching time windows before implementing network water-balance claims. Sensor calibration is recorded only as a future extension; flow values must be calibrated at the hardware/device layer.

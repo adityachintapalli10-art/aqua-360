@@ -725,7 +725,7 @@ def main() -> None:
     with database() as db:
         admin_exists = db.execute("SELECT 1 FROM admins LIMIT 1").fetchone()
     if not admin_exists:
-        print("No admin account found. Create one with: python server.py create-admin", file=sys.stderr)
+        print("No admin account found. Create one with: python main.py create-admin", file=sys.stderr)
     host = os.environ.get("HOST", "127.0.0.1")
     port = int(os.environ.get("PORT", "8000"))
     httpd = ThreadingHTTPServer((host, port), AquaHandler)

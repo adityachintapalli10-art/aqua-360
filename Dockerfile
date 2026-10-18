@@ -7,9 +7,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     AQUAGUARD_DB=/app/data/aquaguard.db
 
 WORKDIR /app
-COPY server.py README.md ./
+COPY main.py README.md ./
 COPY static ./static
 RUN useradd --system --create-home appuser && mkdir -p /app/data && chown -R appuser:appuser /app
 USER appuser
 EXPOSE 8000
-CMD ["python", "server.py"]
+CMD ["python", "main.py"]

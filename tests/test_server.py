@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import server
+import main as server
 
 
 class AquaGuardIntegrationTests(unittest.TestCase):
